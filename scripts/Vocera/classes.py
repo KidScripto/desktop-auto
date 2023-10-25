@@ -1,14 +1,35 @@
 
 
 class users:
+    name:str
+    eid:str
+    email:str
+    cost_center:str
+    tmep:bool
+    phone:str
+    groups:list
+    depts:list
+
 
 class devices:
-
-class emails:
-
-class department:
+    serial:str
+    mac:str
+    label:str=None
+    status:str
+    devtype:str
+    site:str
+    last_user:str
+    last_location:str
+    local_site:str
+    ip_addr:str
 
 class addressbook:
+    name:str
+    entry_type:str
+    phone:str
+    email:str
+    pager:str
+    site:str
 
 def login(username, password):
     from selenium import driver
