@@ -9,8 +9,9 @@ class users:
 
 class User:
     # Init and destructors
-    def __init__(self, name, eid, email, cost_center, temp, phone, groups, depts):
-        self.name = name
+    def __init__(self, frist, last, eid, email, cost_center, temp, phone, groups, depts):
+        self.first = first
+        self.last = last
         self.eid = eid
         self.email = email
         self.cost_center = cost_center
@@ -23,9 +24,10 @@ class User:
         print(f'User {self.name} removed')
     
     # Generic functions
-    def set_attr(self, attribute_name, new_value):
+    def set_val(self, attribute_name, new_value):
         from selenium import webdriver
         from selenium.webdriver.common.by import By
+        from selenium.webdriver.common.action_chains import ActionChains
 
          # change class instance within
         if hasattr(self, attribute_name):
@@ -46,11 +48,46 @@ class User:
         id_box.send_keys("USERNAME")
         pass_box.send_keys("PASSWD")
         login_button.click()
+        ## Navigate to Users tab
+        users = driver.find_element(By.NAME, "users")
+        users.click()
+        driver.implicitly_wait(15)
+        ## Select Correct User
+          ## Define name var
+        tname = self.name.split(" ")
+        name = tname[0][0].lower() + tname[1].lower()
+          ## Select User
+        frame = driver.find_element(By.NAME, "searchlist")
+        driver.switch_to.frame(frame)
+        target = driver.find_element(by.XPATH, f'//*[@id="u-{name}"]')
+        actions = ActionChains(driver)
+        actions.double_click(target).perform() ## Opens the Edit User window
+        ## --------------------------------------------------------
         ## Open Appropriate Link
+        ### iFrame switch to DialogBox
+        diafram = driver.find_element(By.ID, "iframeDialog")
+        driver.switch_to.frame(diafram)
+        ### Maybe swap iFrame again?
+        diafram2 = driver.find_element(By.XPATH, "/html/body/table/tbody/tr/td/iframe")
+        driver.switch_to.frame(diafram2)
+        ### Select link or Field
+        fname = driver.find_element(By.NAME, "firstname")
+        lname = driver.find_element(By.NAME, "lastname")
+        fname.clear()
+        lname.clear()
+        fname.send_keys("NAME")
+        lname.send_keys("NAME")
+        ### Create Save Button attribute and Click it
+        save_button = driver.find_elemenet(By.ID, "savebutton")
+        save_button.click()
+        ### Kill connection
+        driver.quit() # Close webdriver session
         if attribute_name == "name":
             # Make changes
+            
             pass
         if attribute_name == "eid":
+            
             # Make changes
             pass
         if attribute_name == "emial":
