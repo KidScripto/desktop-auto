@@ -41,6 +41,15 @@ documentation = driver.find_element_by_name("adocumentation_link")
 # Interact with Users...
 users.click()
 
+# RUN HEADLESS
+options = ChromeOptions()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
+driver.get('URL')
+driver.quit()
+
+
+
 '''
 https://towardsdatascience.com/controlling-the-web-with-python-6fceb22c5f08
 '''
