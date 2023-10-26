@@ -71,17 +71,18 @@ class User:
         diafram2 = driver.find_element(By.XPATH, "/html/body/table/tbody/tr/td/iframe")
         driver.switch_to.frame(diafram2)
         ### Select link or Field
-        fname = driver.find_element(By.NAME, "firstname")
-        lname = driver.find_element(By.NAME, "lastname")
-        fname.clear()
-        lname.clear()
-        fname.send_keys("NAME")
-        lname.send_keys("NAME")
-        ### Create Save Button attribute and Click it
-        save_button = driver.find_elemenet(By.ID, "savebutton")
-        save_button.click()
-        ### Kill connection
-        driver.quit() # Close webdriver session
+        if attribute_name == "name":
+            fname = driver.find_element(By.NAME, "firstname")
+            lname = driver.find_element(By.NAME, "lastname")
+            fname.clear()
+            lname.clear()
+            fname.send_keys("NAME")
+            lname.send_keys("NAME")
+            ### Create Save Button attribute and Click it
+            save_button = driver.find_elemenet(By.ID, "savebutton")
+            save_button.click()
+            ### Kill connection
+            driver.quit() # Close webdriver session
         if attribute_name == "name":
             # Make changes
             
