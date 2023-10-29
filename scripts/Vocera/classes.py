@@ -27,13 +27,13 @@ class User:
         from selenium.webdriver.common.by import By
         from selenium.webdriver.common.action_chains import ActionChains
 
-         # change class instance within
+         # change class instance locally
         if hasattr(self, attribute_name):
             setattr(self, attribute_name, new_value)
         else:
             print(f'Attribute {attribute_name} does not exist!')
 
-        # make changes in Admin Console w/ Selenium
+        # make changes in Admin Console w/ Selenium    !!! This will probably all have to be moved within the "If" block
         ## Create Driver object
         options = ChromeOptions()
         options.add_argument("--headless=new")
