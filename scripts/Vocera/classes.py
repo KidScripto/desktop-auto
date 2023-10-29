@@ -1,24 +1,22 @@
+import random
+import string
+from dataclasses import dataclass, field
 
-'''
-class users:
-
-    def __init__(self, name, eid, email, cost_center, temp, phone, groups, depts):
-        self.name =
-    # General operations
-'''
-
+@dataclass
 class User:
-    # Init and destructors
-    def __init__(self, frist, last, eid, email, cost_center, temp, phone, groups, depts):
-        self.first = first
-        self.last = last
-        self.eid = eid
-        self.email = email
-        self.cost_center = cost_center
-        self.temp = temp
-        self.phone = phone
-        self.groups = groups
-        self.depts = depts
+    first_name:str = ''
+    last_name:str = ''
+    eid:str = ''
+    email:str = ''
+    cost_center:str = ''
+    temp:bool = False
+    phone:str = ''
+    groups:str = ''
+    depts:str = ''
+    _search_str:str = field(init=False)
+
+    def __post_init__(self) -> None:
+        self.search_string = f'{self.name} {self.eid}'
     
     def __del__(self):
         print(f'User {self.name} removed')
@@ -118,7 +116,7 @@ class User:
         
         # call destructor function
         del self
-
+@dataclass
 class devices:
     serial:str
     mac:str
@@ -131,6 +129,7 @@ class devices:
     local_site:str
     ip_addr:str
 
+@dataclass
 class addressbook:
     name:str
     entry_type:str
@@ -139,6 +138,7 @@ class addressbook:
     pager:str
     site:str
 
+'''
 def login(username, password):
     from selenium import driver
     from selenium.webdriver.common.by import By
@@ -154,7 +154,7 @@ def login(username, password):
 def add_user()
 
 def remove_user(
-
+'''
 # Generate user instances from CSV. Have to create the CSV with selenium by scraping the admin portal
 def gen_instances(file):
     import csv
@@ -163,3 +163,6 @@ def gen_instances(file):
         reader = csv.reader(f)
         for row in reader:
             person.append(User(row[0], row[1], row[2], row[3],row[4],row[5],row[6],row[7])) 
+
+def generate_id() -> str:
+
