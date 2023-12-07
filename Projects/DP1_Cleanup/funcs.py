@@ -47,6 +47,15 @@ def remove_files(*args) -> None:
     '''
     Reads in a list of filepaths supplied by some other function, and iterates over those filepaths. If they exist, they will be deleted. Could potentially retool to work from a file
     '''
+    '''
+    with open(file) as f:
+        for line in f:
+            if os.path.exists(line):
+                os.remove(line)
+            else:
+                print("Filepath not found")
+                continue
+    '''
     import os
     for arg in args:
         if os.path.exists(arg):
