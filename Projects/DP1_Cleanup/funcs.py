@@ -7,6 +7,7 @@ def count_files_and_folders(directory:str) -> dict:
 
     file_counter = Counter()
     folder_counter = Counter()
+    full_paths = Counter() #?
 
     def proccess_path(path:str):
         for root, dirs, files in os.walk(path):
@@ -14,6 +15,7 @@ def count_files_and_folders(directory:str) -> dict:
                 folder_counter[folder] += 1
             for file in files:
                 file_counter[file] += 1
+                full_paths[file] = os.path.join(root, file) #?
 
     proccess_path(directory)
     return file_counter, folder_counter
@@ -40,4 +42,7 @@ def get_old_files(directory:str, threshold:int=365) -> list:
                 old_files.append(file_path)
 
     return old_files
+
+def remove_files(*args) -> None:
+    for arg in args:
 
