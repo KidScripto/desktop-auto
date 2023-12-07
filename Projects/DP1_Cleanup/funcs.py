@@ -44,5 +44,17 @@ def get_old_files(directory:str, threshold:int=365) -> list:
     return old_files
 
 def remove_files(*args) -> None:
+    '''
+    Reads in a list of filepaths supplied by some other function, and iterates over those filepaths. If they exist, they will be deleted. Could potentially retool to work from a file
+    '''
+    import os
     for arg in args:
+        if os.path.exists(arg):
+            os.remove(arg)
+        else:
+            print("Filepath not found")
+            continue
+
+
+
 
