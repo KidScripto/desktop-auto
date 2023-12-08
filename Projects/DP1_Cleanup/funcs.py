@@ -64,6 +64,16 @@ def remove_files(*args) -> None:
             print("Filepath not found")
             continue
 
-
-
+def recursive_copy(source_path:str, destination_path:str) -> None:
+    '''
+    Function to recur
+    '''
+    import shutil
+    try:
+        src = source_path
+        dest = destination_path
+        destination = shutil.copytree(src,dest)
+    except Exception as e:
+        print("Error: {e}")
+        return None
 
