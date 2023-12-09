@@ -64,9 +64,10 @@ def remove_files(*args) -> None:
             print("Filepath not found")
             continue
 
-def recursive_copy(source_path:str, destination_path:str) -> None:
+def simpleRecursiveCopy(source_path:str, destination_path:str) -> None:
     '''
-    Function to recur
+    Function to recursively copy a directory structure from source_path to destination_path.
+    Note: destination_path must not already exist and will be created by the function; will return error if given extan path
     '''
     import shutil
     try:
@@ -76,4 +77,39 @@ def recursive_copy(source_path:str, destination_path:str) -> None:
     except Exception as e:
         print("Error: {e}")
         return None
+
+def pauseRecursiveCopy(source_dir:str, destination_dir:str) -> None:
+    """
+    Recursively copy the entire directory structure from source_dir to destination_dir
+    pausing for 5 seconds after each file copy in order to stop from generating too much network traffic too quickly.
+
+    Parameters:
+    - source_dir: The source directory to be copied.
+    - destination_dir: The destination directory where the copy will be placed.
+    """
+    import os
+    import shutil
+    import time
+    # Create the destination directory if it doesn't exist
+    if not os.path.exists(destination_dir):
+        os.makedirs(destination_dir)
+
+    # Walk through the source directory
+    for root, dirs, files in os.walk(source_dir):
+        for file in files:
+            source_path = os.path.join(root, file)
+            relative_path = os.path.relpath(source_path, source_dir)
+            destination_path = os.path.join(destination_dir, relative_path)
+
+            # Create destination directory structure if not exists
+            os.makedirs(os.path.dirname(destination_path), exist_ok=True)
+
+            # Copy the file
+            shutil.copy2(source_path, destination_path)
+
+            # Pause for 5 seconds
+            time.sleep(5)
+
+if __name__ == "__main__":
+    pauseRecursiveCopy("./Test1", "Test4")
 
