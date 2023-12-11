@@ -91,24 +91,27 @@ def pauseRecursiveCopy(source_dir:str, destination_dir:str) -> None:
     import shutil
     import time
     # Create the destination directory if it doesn't exist
-    if not os.path.exists(destination_dir):
-        os.makedirs(destination_dir)
+    try:
+        if not os.path.exists(destination_dir):
+            os.makedirs(destination_dir)
 
     # Walk through the source directory
-    for root, dirs, files in os.walk(source_dir):
-        for file in files:
-            source_path = os.path.join(root, file)
-            relative_path = os.path.relpath(source_path, source_dir)
-            destination_path = os.path.join(destination_dir, relative_path)
+        for root, dirs, files in os.walk(source_dir):
+            for file in files:
+                source_path = os.path.join(root, file)
+                relative_path = os.path.relpath(source_path, source_dir)
+                destination_path = os.path.join(destination_dir, relative_path)
 
-            # Create destination directory structure if not exists
-            os.makedirs(os.path.dirname(destination_path), exist_ok=True)
+                # Create destination directory structure if not exists
+                os.makedirs(os.path.dirname(destination_path), exist_ok=True)
 
-            # Copy the file
-            shutil.copy2(source_path, destination_path)
+                # Copy the file
+                shutil.copy2(source_path, destination_path)
 
-            # Pause for 5 seconds
-            time.sleep(5)
+                # Pause for 5 seconds
+                time.sleep(5)
+    except Exception as e:
+        print("Error encountered:\n {e}")
 
 if __name__ == "__main__":
     pauseRecursiveCopy("./Test1", "Test4")
