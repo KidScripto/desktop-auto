@@ -111,8 +111,8 @@ def pauseRecursiveCopy(source_dir:str, destination_dir:str) -> None:
                 # Pause for 5 seconds
                 time.sleep(5)
     except Exception as e:
-        print("Error encountered:\n {e}")
+        print(f"Error encountered:\n {e}")
 
 if __name__ == "__main__":
-    pauseRecursiveCopy("./Test1", "Test4")
+    pauseRecursiveCopy("~/share/", "~/testcopy/")
 
