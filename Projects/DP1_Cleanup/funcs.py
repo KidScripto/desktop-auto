@@ -97,6 +97,15 @@ def pauseRecursiveCopy(source_dir:str, destination_dir:str) -> None:
 
     # Walk through the source directory
         for root, dirs, files in os.walk(source_dir):
+            for directory in dirs:
+                source_path = os.path.join(root, directory)
+                relative_path = os.path.join(source_path, source_dir)
+                destination_path = os.path.join(destination_dir, relative_path)
+
+                os.makedirs(destination_path, exist_ok=True)
+
+                time.sleep(5)
+
             for file in files:
                 source_path = os.path.join(root, file)
                 relative_path = os.path.relpath(source_path, source_dir)
